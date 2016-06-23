@@ -1,5 +1,5 @@
 FROM debian:jessie
-MAINTAINER Diego
+MAINTAINER Diego Najar
 
 # Variables
 ENV NGINX_VERSION 1.10.1-1~jessie
@@ -21,7 +21,7 @@ RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC64107
 						nginx-module-perl \
 						nginx-module-njs \
 						gettext-base \
-                        php5-fpm \
+						php5-fpm \
 						supervisor
 
 # Hacks Nginx and php-fpm config
@@ -48,8 +48,8 @@ ADD conf/supervisord.conf /etc/supervisord.conf
 ADD www/index.php /usr/share/nginx/html/index.php
 
 # Nginx logs to Docker log collector
-RUN ln -sf /dev/stdout /var/log/nginx/access.log \
-	&& ln -sf /dev/stderr /var/log/nginx/error.log
+RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
+	ln -sf /dev/stderr /var/log/nginx/error.log
 
 EXPOSE 80 443
 
